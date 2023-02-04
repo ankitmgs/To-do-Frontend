@@ -1,6 +1,5 @@
 import React from "react";
 import {
-
   MDBContainer,
   MDBCard,
   MDBCardBody,
@@ -16,7 +15,6 @@ import Swal from "sweetalert2";
 import app_config from "../config";
 
 const Login = () => {
-
   const navigate = useNavigate();
   const url = app_config.api_url;
 
@@ -35,27 +33,39 @@ const Login = () => {
       },
     };
 
-    fetch(url + "/user/check-login", reqOPT).then((res) => {
-      console.log(res.status);
-      if (res.status === 200) {
-        Swal.fire({
-          icon: "success",
-          title: "Success",
-          text: "You have loggedin successfully!",
-        })
-        .then(() => {
-          navigate("/todolist")
-        })
-      } else if (res.status === 300) {
-        Swal.fire({
-          icon: "error",
-          title: "Failed",
-          text: "Email or password is incorrect!",
-        })
-        
-      }
-      return res.json();
-    });
+    fetch(url + "/user/check-login", reqOPT)
+      .then((res) => {
+        console.log(res.status);
+        if (res.status === 200) {
+          Swal.fire({
+            icon: "success",
+            title: "Success",
+            text: "You have loggedin successfully!",
+          }).then(() => {
+            navigate("/todolist");
+          });
+        } else if (res.status === 300) {
+          Swal.fire({
+            icon: "error",
+            title: "Failed",
+            text: "Email or password is incorrect!",
+          });
+        } else {
+          Swal.fire({
+            icon: "warning",
+            title: "Failed",
+            text: "Something Error Occured !",
+          });
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        sessionStorage.setItem("user", JSON.stringify(data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <div>

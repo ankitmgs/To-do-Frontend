@@ -9,10 +9,13 @@ import { NavLink } from "react-router-dom";
 const TodoList = () => {
   const url = app_config.api_url;
 
+  const [currentUser, setCurrentUser] = useState(JSON.parse(sessionStorage.getItem("user")))
+
   const [itemsArray, setItemsArray] = useState([]);
 
   const getItemDataFromBackend = async () => {
-    const response = await fetch(url + "/todo/items");
+    console.log("current user ka detail", currentUser);
+    const response = await fetch(url + "/todo/getbyuserid/"+currentUser._id);
     const data = await response.json();
     console.log(data);
     setItemsArray(data);
