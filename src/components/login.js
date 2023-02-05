@@ -24,7 +24,7 @@ const Login = () => {
   };
 
   const loginSubmit = (formdata) => {
-    console.log(formdata);
+    // console.log(formdata);
     const reqOPT = {
       method: "POST",
       body: JSON.stringify(formdata),
@@ -60,7 +60,7 @@ const Login = () => {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         sessionStorage.setItem("user", JSON.stringify(data));
       })
       .catch((err) => {

@@ -20,7 +20,7 @@ const EditItem = () => {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setInitialData(data);
         setIsloading(false);
       })
@@ -34,7 +34,7 @@ const EditItem = () => {
   }, []);
 
   const updateSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
     fetch(url + "/todo/update/" + itemId.id, {
       method: "PUT",
       body: JSON.stringify(data),

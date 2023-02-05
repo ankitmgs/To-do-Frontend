@@ -14,10 +14,10 @@ const TodoList = () => {
   const [itemsArray, setItemsArray] = useState([]);
 
   const getItemDataFromBackend = async () => {
-    console.log("current user ka detail", currentUser);
+    // console.log("current user ka detail", currentUser);
     const response = await fetch(url + "/todo/getbyuserid/"+currentUser._id);
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
     setItemsArray(data);
   };
 
@@ -65,7 +65,7 @@ const TodoList = () => {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
       });
   };
 
