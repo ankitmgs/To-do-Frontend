@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   MDBContainer,
   MDBCard,
@@ -13,10 +13,12 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { Formik } from "formik";
 import Swal from "sweetalert2";
 import app_config from "../config";
+import { CircularProgress } from "@mui/material";
 
 const Login = () => {
   const navigate = useNavigate();
   const url = app_config.api_url;
+  const [isloading, setIsloading] = useState(false);
 
   const loginForm = {
     email: "",
@@ -24,6 +26,7 @@ const Login = () => {
   };
 
   const loginSubmit = (formdata) => {
+    setIsloading(true);
     // console.log(formdata);
     const reqOPT = {
       method: "POST",
@@ -57,6 +60,7 @@ const Login = () => {
             text: "Something Error Occured !",
           });
         }
+        setIsloading(false);
         return res.json();
       })
       .then((data) => {
@@ -125,7 +129,7 @@ const Login = () => {
                         color="dark"
                         size="lg"
                       >
-                        Login
+                        {isloading ? <CircularProgress size="1.2rem" style={{color: "white"}} /> : "Login"}
                       </button>
                       <p className="mb-5 " style={{ color: "#393f81" }}>
                         Don't have an account?
