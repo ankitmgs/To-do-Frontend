@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   MDBContainer,
   MDBCard,
@@ -10,9 +10,11 @@ import { Formik } from "formik";
 import app_config from "../config";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
 
 const Signup = () => {
   const navigate = useNavigate();
+  const [isloading, setIsloading] = useState(false);
 
   const url = app_config.api_url;
 
@@ -23,6 +25,7 @@ const Signup = () => {
   };
 
   const signupSubmit = (formData) => {
+    setIsloading(true);
     console.log(formData);
     fetch(url + "/user/add", {
       method: "POST",
@@ -36,11 +39,11 @@ const Signup = () => {
             icon: "success",
             title: "Success",
             text: "Registered Successfully",
-          })
-          .then(() => {
+          }).then(() => {
             navigate("/login");
-          })
+          });
         }
+        setIsloading(false);
         return res.json();
       })
       .then((data) => {
@@ -54,15 +57,12 @@ const Signup = () => {
           <form onSubmit={handleSubmit}>
             <MDBContainer
               fluid
-              className="d-flex align-items-center justify-content-center bg-image"
-              style={{
-                backgroundImage:
-                  "url(https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp)",
-              }}
+              className="todo-container d-flex align-items-center justify-content-center bg-image"
+              
             >
               <div className="mask gradient-custom-3"></div>
-              <MDBCard className="m-5" style={{ maxWidth: "600px" }}>
-                <MDBCardBody className="px-5">
+              <MDBCard className="todo-card" style={{ maxWidth: "600px" }}>
+                <MDBCardBody className="todo-card-body">
                   <h2 className="text-uppercase text-center mb-5">
                     Create an account
                   </h2>
@@ -105,7 +105,7 @@ const Signup = () => {
                     size="lg"
                     type="submit"
                   >
-                    Register
+                    {isloading ? <CircularProgress size="1.2rem" style={{color: "white"}} /> : "Register"}
                   </button>
                 </MDBCardBody>
               </MDBCard>

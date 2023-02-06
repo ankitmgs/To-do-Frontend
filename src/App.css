@@ -45,3 +45,25 @@
     margin-left: 1rem;
   }
 }
+.todo-card-body {
+  padding: 2rem 3rem 0 3rem;
+}
+@media only screen and (max-width: 545px) {
+  .todo-card-body {
+    padding: 1rem;
+  }
+}
+.todo-card {
+  margin: 5rem;
+}
+@media only screen and (max-width: 545px) {
+  .todo-card {
+    margin: 0.5rem 0 0.5rem 0;
+  }
+}
+.todo-container {
+  background: url("../public/task-bg.jpg") no-repeat;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+}
